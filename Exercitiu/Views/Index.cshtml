@@ -1,0 +1,30 @@
+﻿@model List<TodoItem>
+
+<h2>Todo List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Deadline</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var todo in Model)
+        {
+            <tr>
+                <td>@todo.Id</td>
+                <td>@todo.Name</td>
+                <td>@todo.Deadline.ToShortDateString()</td>
+                <td>@(todo.Status == 0 ? "Pending" : (todo.Status == 1 ? "Done" : "Rejected"))</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@todo.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@todo.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
